@@ -60,5 +60,3 @@ endif()
 install(TARGETS user_manager DESTINATION ${PLUGIN_INSTALL_DIR})
 
 install(FILES user_manager.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-
-install(DIRECTORY pics/ DESTINATION ${DATA_INSTALL_DIR}/user-manager/avatars)
