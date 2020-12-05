@@ -55,7 +55,6 @@ AccountInfo::AccountInfo(AccountModel* model, QWidget* parent, Qt::WindowFlags f
     connect(m_info->realName, &QLineEdit::textEdited, this, &AccountInfo::hasChanged);
     connect(m_info->email, &QLineEdit::textEdited, this, &AccountInfo::hasChanged);
     connect(m_info->administrator, &QAbstractButton::clicked, this, &AccountInfo::hasChanged);
-    connect(m_info->automaticLogin, &QAbstractButton::clicked, this, &AccountInfo::hasChanged);
     connect(m_info->changePasswordButton, &QPushButton::clicked, this, &AccountInfo::changePassword);
 
     connect(m_model, &QAbstractItemModel::dataChanged, this, &AccountInfo::dataChanged);
@@ -142,7 +141,6 @@ void AccountInfo::loadFromModel()
     m_info->realName->setText(m_model->data(m_index, AccountModel::RealName).toString());
     m_info->email->setText(m_model->data(m_index, AccountModel::Email).toString());
     m_info->administrator->setChecked(m_model->data(m_index, AccountModel::Administrator).toBool());
-    m_info->automaticLogin->setChecked(m_model->data(m_index, AccountModel::AutomaticLogin).toBool());
 }
 
 bool AccountInfo::save()
@@ -168,10 +166,6 @@ bool AccountInfo::save()
     if (m_infoToSave.contains(AccountModel::Administrator) &&
             !m_model->setData(m_index, m_info->administrator->isChecked(), AccountModel::Administrator)) {
         failed.append(AccountModel::Administrator);
-    }
-    if (m_infoToSave.contains(AccountModel::AutomaticLogin) &&
-            !m_model->setData(m_index, m_info->automaticLogin->isChecked(), AccountModel::AutomaticLogin)) {
-        failed.append(AccountModel::AutomaticLogin);
     }
     if (m_infoToSave.contains(AccountModel::Password)) {
         if (!m_model->setData(m_index, m_infoToSave[AccountModel::Password], AccountModel::Password)) {
@@ -245,10 +239,6 @@ void AccountInfo::hasChanged()
 
     if (m_info->administrator->isChecked() != m_model->data(m_index, AccountModel::Administrator).toBool()) {
         infoToSave.insert(AccountModel::Administrator, m_info->administrator->isChecked());
-    }
-
-    if (m_info->automaticLogin->isChecked() != m_model->data(m_index, AccountModel::AutomaticLogin).toBool()) {
-        infoToSave.insert(AccountModel::AutomaticLogin, m_info->automaticLogin->isChecked());
     }
 
     if (m_infoToSave.contains(AccountModel::Face)) {

@@ -202,13 +202,6 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="1">
-       <widget class="QCheckBox" name="automaticLogin">
-        <property name="text">
-         <string>Log in automatically</string>
-        </property>
-       </widget>
-      </item>
       <item row="3" column="1">
        <widget class="QPushButton" name="changePasswordButton">
         <property name="text">
@@ -244,7 +237,6 @@
   <tabstop>email</tabstop>
   <tabstop>changePasswordButton</tabstop>
   <tabstop>administrator</tabstop>
-  <tabstop>automaticLogin</tabstop>
  </tabstops>
  <resources/>
  <connections/>
